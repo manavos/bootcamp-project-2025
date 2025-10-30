@@ -1,0 +1,40 @@
+.blogDetail {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.blogDetail h1 {
+  font-size: 40px;
+  margin-bottom: 1px;
+  color: #574144;
+  text-align: center;
+  font-weight: bold;
+}
+
+.blogDetail h3 {
+  font-size: 22px;
+  margin-bottom: 1px;
+  color: #574144;
+  text-align: center;
+  font-style: italic;
+  padding-bottom: 10px;
+}
+
+.blogDetail p {
+  letter-spacing: -0.4px;
+  font-size: 20px;
+  line-height: 35px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.blogDetail img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;   
+  border-radius: 10px;
+  display: block;
+}
