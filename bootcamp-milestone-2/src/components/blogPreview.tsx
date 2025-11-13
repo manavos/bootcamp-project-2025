@@ -4,12 +4,17 @@ import Link from "next/link";
 import type { Blog } from "@/app/blogData";
 import style from "./blogPreview.module.css";
 
-export default function BlogPreview(props: Blog) {
+type BlogPreviewProps = Omit<Blog, "content">; //content not needed for blogpreview
+
+
+export default function BlogPreview(props: BlogPreviewProps) {
+ 
+  
   return (
     <div className={style.blogCard}>
       <Image
         className={style.blogImage}
-        src={props.image}      // must start with / for public folder
+        src={props.image} 
         alt={props.imageAlt}
         width={500}
         height={300}
@@ -20,6 +25,7 @@ export default function BlogPreview(props: Blog) {
       <Link href={`/blogs/${props.slug}`} className={style.readMore}>
         Read More →
       </Link>
+      
     </div>
   );
 }
