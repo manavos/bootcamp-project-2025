@@ -1,10 +1,17 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Blog } from "@/app/blogData";
 import style from "./blogPreview.module.css";
 
-type BlogPreviewProps = Omit<Blog, "content">; //content not needed for blogpreview
+type BlogPreviewProps = {
+  _id: string;
+  title: string;
+  slug: string;
+  image: string;
+  imageAlt: string;
+  date: string;
+  description: string;
+};
 
 
 export default function BlogPreview(props: BlogPreviewProps) {

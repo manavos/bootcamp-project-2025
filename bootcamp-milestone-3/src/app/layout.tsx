@@ -1,4 +1,4 @@
-import type { Metadata } from "next"; // Object to set metadata
+import type { Metadata } from "next";
 
 import "./globals.css";
 import Navbar from "@/components/Navbar";

@@ -16,7 +16,7 @@ const projectSchema = new Schema<Project>({
     description: { type: String, required: true },
 })
 
-// defining the collection and model
+
 const Project = mongoose.models['projects'] ||
     mongoose.model('projects', projectSchema);
 

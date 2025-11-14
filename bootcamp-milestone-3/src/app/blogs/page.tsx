@@ -2,9 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link"
 import BlogPreview from "@/components/blogPreview";
-import blogs from "@/app/blogData" // not using since using mongodb
-import connectDB from "@/database/db"; // adjust this path to where connectDB is
-import Blog from "@/database/blogSchema"; // adjust this path to your Blog model
+import connectDB from "@/database/db"; 
+import Blog from "@/database/blogSchema";
 
 // data fetching function
 async function getBlogs() {
@@ -21,7 +20,7 @@ async function getBlogs() {
 
 // server Component
 export default async function BlogsPage() {
-  const blogs = await getBlogs(); // Fetch from DB
+  const blogs = await getBlogs(); 
 
   if (!blogs) {
     return (

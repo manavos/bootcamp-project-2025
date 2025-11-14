@@ -1,4 +1,3 @@
-// src/components/portfolioCard.tsx
 import style from "./portfolioCard.module.css";
 import Image from "next/image";
 import Link from "next/link";
