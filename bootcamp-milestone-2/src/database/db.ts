@@ -1,18 +1,23 @@
-// db.ts
 import mongoose from "mongoose";
 
-const url: string = process.env.MONGO_URI as string;
-let connection: typeof mongoose;
-
-/**
- * Makes a connection to a MongoDB database. If a connection already exists, does nothing
- * Call this function at the start of api routes and data fetches
- * @returns {Promise<typeof mongoose>}
- */
 const connectDB = async () => {
-  if (!connection) {
-    connection = await mongoose.connect(url);
-    return connection;
+  try {
+    if (mongoose.connection.readyState >= 1) {
+      console.log("Using existing MongoDB connection");
+      return mongoose.connection;
+    }
+
+    const url = process.env.MONGO_URI;
+    if (!url) throw new Error("Missing MONGO_URI in environment variables");
+    console.log("Connecting to MongoDB...");
+
+    await mongoose.connect(url);
+    console.log("MongoDB connected successfully");
+
+    return mongoose.connection;
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+    throw err;
   }
 };
 
