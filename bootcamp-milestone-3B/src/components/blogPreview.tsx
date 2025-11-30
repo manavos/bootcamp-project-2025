@@ -4,7 +4,7 @@ import Link from "next/link";
 import style from "./blogPreview.module.css";
 
 type BlogPreviewProps = {
-  _id: string;
+
   title: string;
   slug: string;
   image: string;

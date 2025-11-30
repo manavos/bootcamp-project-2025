@@ -1,6 +1,13 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import style from "../blogs.module.css";
+import Comment from "@/components/Comment"
+
+type IComment = {
+  user: string;
+  time: Date;
+  comment: string;
+};
 
 type Blog = {
   title: string;
@@ -8,6 +15,7 @@ type Blog = {
   image: string;
   imageAlt: string;
   content: string;
+  comments: IComment[];
 };
 
 async function getBlog(slug: string): Promise<Blog | null> {
@@ -36,6 +44,15 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         })}</h3>
       <Image src={blog.image} alt={blog.imageAlt} width={800} height={500} />
       <p>{blog.content}</p>
+       <h2>Comments</h2>
+      {blog.comments && blog.comments.length > 0 ? (
+        blog.comments.map((comment: IComment, i: number) => (
+          <Comment key={i} comment={comment} />
+        ))
+      ) : (
+        <p>No comments yet.</p>
+      )}
+
     </main>
   );
 }

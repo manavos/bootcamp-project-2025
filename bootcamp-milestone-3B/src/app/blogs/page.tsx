@@ -4,6 +4,8 @@ import Link from "next/link"
 import BlogPreview from "@/components/blogPreview";
 import connectDB from "@/database/db"; 
 import Blog from "@/database/blogSchema";
+import Comment from "@/components/Comment";
+
 
 // data fetching function
 async function getBlogs() {

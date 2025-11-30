@@ -1,0 +1,31 @@
+.commentCard {
+  border: 4px;
+  border-radius: 5px;
+  border-color: #574144;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+}
+
+.separator {
+  color: #999;
+}
+
+.commentCard p {
+  text-align: left;
+  color:darkred
+
+}
+
+.commentDivider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
