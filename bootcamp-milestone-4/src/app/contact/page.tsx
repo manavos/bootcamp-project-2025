@@ -48,6 +48,9 @@ export default function Contact() {
   };
 
   return (
+    <main className={style.blogDetail}>
+    <h1 className="page-title"><strong>Contact Me!</strong></h1>
+
     <form onSubmit={handleSubmit} className={style.formContainer}>
       <label>Your Name</label>
       <input
@@ -76,5 +79,6 @@ export default function Contact() {
 
       {status && <p>{status}</p>}
     </form>
+    </main>
   );
 }

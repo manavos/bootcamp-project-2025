@@ -3,23 +3,22 @@
 import React, { useState } from "react";
 import CommentForm from "./commentForm";
 
-type ToggleProps = {
-  type: "blog" | "portfolio";
+type CommentFormToggleProps = {
   target: string;
-  onNewComment?: (comment: IComment) => void;
+  type: "blog" | "portfolio";
+  onAddComment: (comment: any) => void;
 };
 
-export default function CommentFormToggle({ type, target, onNewComment }: ToggleProps) {
+export default function CommentFormToggle({ target, type, onAddComment }: CommentFormToggleProps) {
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div style={{ marginTop: "10px" }}>
-      <button onClick={() => setShowForm(!showForm)}>
+    <div style={{ marginTop: "1rem" }}>
+      <button onClick={() => setShowForm((prev) => !prev)}>
         {showForm ? "Cancel" : "Add Comment"}
       </button>
-      {showForm && (
-        <CommentForm type={type} target={target} onNewComment={onNewComment} />
-      )}
+
+      {showForm && <CommentForm target={target} type={type} onAddComment={onAddComment} />}
     </div>
   );
 }

@@ -55,6 +55,8 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         <p>No comments yet.</p>
       )}
 
+      <h3>Add comment</h3>
+
       <CommentForm slug={slug} />
 
     </main>

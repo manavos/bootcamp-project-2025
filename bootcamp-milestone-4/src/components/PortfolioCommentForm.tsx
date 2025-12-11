@@ -1,20 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
-export default function CommentForm({ slug }: { slug: string }) {
-  const [form, setForm] = useState({ user: "", comment: "" });
+type FormState = {
+  user: string;
+  comment: string;
+};
+
+type PortfolioCommentFormProps = {
+  project: string;
+};
+
+export default function PortfolioCommentForm({ project }: PortfolioCommentFormProps) {
+  const [form, setForm] = useState<FormState>({ user: "", comment: "" });
   const [status, setStatus] = useState("");
 
-  async function handleSubmit(e: React.FormEvent) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("");
 
     try {
-      const res = await fetch(`/api/blogs/${slug}/comment`, {
+      const res = await fetch("/api/portfolio/comment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          project,
+          user: form.user,
+          comment: form.comment,
+        }),
       });
 
       if (!res.ok) {
@@ -24,15 +41,14 @@ export default function CommentForm({ slug }: { slug: string }) {
 
       setStatus("Comment posted!");
       setForm({ user: "", comment: "" });
-      window.location.reload(); // refresh comments
+
+      // Optional: fetch new comments or reload page
+      window.location.reload();
     } catch (err) {
+      console.error(err);
       setStatus("Something went wrong.");
     }
-  }
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} style={{ marginTop: "20px" }}>
