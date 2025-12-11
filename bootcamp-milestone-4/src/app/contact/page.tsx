@@ -1,44 +1,80 @@
-export default function Contact(){
-    return (
-    <main>
-      <h1 className="page-title"><strong>Contact me!</strong></h1>
+"use client";
 
-      <form id="contact-form" className="contact-form">
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Name"
-        />
+import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import style from "@/components/contact.module.css"
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Email"
-        />
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<string | null>(null);
 
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          placeholder="Message"
-          
-        />
+  // handle form input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-        <input
-          className="button"
-          type="submit"
-          id="submit"
-          name="submitbutton"
-          value="Submit"
-        />
-      </form>
-    </main>
+  // handle form submit
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const result = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      console.log("Email sent successfully:", result.text);
+      setStatus("Message sent successfully!");
+      setFormData({ name: "", email: "", message: "" }); // reset form
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("Failed to send message. Try again later.");
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className={style.formContainer}>
+      <label>Your Name</label>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+      />
+
+      <label>Your Email</label>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+
+      <label>Your Message</label>
+      <textarea
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+      />
+
+      <button type="submit">Send</button>
+
+      {status && <p>{status}</p>}
+    </form>
   );
-
-
-
 }

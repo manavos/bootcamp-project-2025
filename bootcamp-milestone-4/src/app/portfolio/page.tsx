@@ -3,6 +3,8 @@ import connectDB from "@/database/db";
 import Project from "@/database/projectSchema";
 import PortfolioCard from "@/components/portfolioCard";
 import style from "@/components/portfolioCard.module.css";
+import CommentFormToggle from "@/components/CommentFormToggle";
+import CommentForm from "@/components/commentForm";
 
 
 async function getProjects() {
@@ -31,8 +33,12 @@ export default async function PortfolioPage() {
             imageAlt={p.imageAlt}
             link={p.link}
             description={p.description}
+            comments={p.comments} 
+          
           />
         ))}
+
+        
       </div>
     </main>
   );

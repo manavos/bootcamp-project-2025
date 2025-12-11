@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import style from "../blogs.module.css";
 import Comment from "@/components/Comment"
+import CommentForm from "@/components/commentForm";
+
 
 type IComment = {
   user: string;
@@ -52,6 +54,8 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
       ) : (
         <p>No comments yet.</p>
       )}
+
+      <CommentForm slug={slug} />
 
     </main>
   );
