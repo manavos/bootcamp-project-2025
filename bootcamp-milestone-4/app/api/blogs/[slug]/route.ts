@@ -1,7 +1,6 @@
-
-import { NextRequest, NextResponse } from 'next/server'
-import connectDB from "@/database/db"
-import blogSchema from "@/database/blogSchema"
+import { NextRequest, NextResponse } from "next/server";
+import connectDB from "../../../../database/db";
+import blogSchema from "../../../../database/blogSchema";
 
 /* IParams is a TypeScript type definition that describes the structure of the second
    argument that Next.js passes to our API route handler.
@@ -22,10 +21,10 @@ import blogSchema from "@/database/blogSchema"
    /api/blog/[slug]/route.ts creates { params: { slug: "actual-slug-value" } }
 */
 type IParams = {
-		params: {
-			slug: string
-		}
-}
+  params: {
+    slug: string;
+  };
+};
 
 /*
 	The function below and the functions you create inside route.ts files are called
@@ -39,16 +38,19 @@ type IParams = {
 	We need to include req, even though we don't use it here, so that we can access
 	the second argument
 */
-export async function GET(req: Request, context: { params: Promise<{ slug: string }> }) {
-        // giving error: needed to await params before destructuring
-        const { slug } = await context.params;
+export async function GET(
+  req: Request,
+  context: { params: Promise<{ slug: string }> }
+) {
+  // giving error: needed to await params before destructuring
+  const { slug } = await context.params;
 
-        await connectDB();
+  await connectDB();
 
-	   try {
-	        const blog = await blogSchema.findOne({ slug }).orFail()
-	        return NextResponse.json(blog)
-	    } catch (err) {
-	        return NextResponse.json('Blog not found.', { status: 404 })
-	    }
+  try {
+    const blog = await blogSchema.findOne({ slug }).orFail();
+    return NextResponse.json(blog);
+  } catch (err) {
+    return NextResponse.json("Blog not found.", { status: 404 });
+  }
 }

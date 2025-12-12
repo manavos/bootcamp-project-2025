@@ -1,4 +1,4 @@
-import type { IComment } from "@/database/blogSchema";
+import type { IComment } from "../database/blogSchema";
 import style from "./comment.module.css";
 
 type commentProps = {

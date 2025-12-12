@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link"
-import BlogPreview from "@/components/blogPreview";
-import connectDB from "@/database/db"; 
-import Blog from "@/database/blogSchema";
-import Comment from "@/components/Comment";
-
+import Link from "next/link";
+import BlogPreview from "../../components/blogPreview";
+import connectDB from "../../database/db";
+import Blog from "../../database/blogSchema";
+import Comment from "../../components/Comment";
 
 // data fetching function
 async function getBlogs() {
@@ -22,12 +21,14 @@ async function getBlogs() {
 
 // server Component
 export default async function BlogsPage() {
-  const blogs = await getBlogs(); 
+  const blogs = await getBlogs();
 
   if (!blogs) {
     return (
       <main>
-        <h1 className="page-title"><strong>Blog</strong></h1>
+        <h1 className="page-title">
+          <strong>Blog</strong>
+        </h1>
         <p>Sorry, no blogs found.</p>
       </main>
     );
@@ -35,7 +36,9 @@ export default async function BlogsPage() {
 
   return (
     <main>
-      <h1 className="page-title"><strong>Blog</strong></h1>
+      <h1 className="page-title">
+        <strong>Blog</strong>
+      </h1>
       <div id="blog-container" className="my-blog">
         {blogs.map((blog) => (
           <BlogPreview
