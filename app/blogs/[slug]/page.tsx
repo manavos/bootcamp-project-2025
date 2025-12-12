@@ -20,10 +20,14 @@ type Blog = {
 };
 
 async function getBlog(slug: string): Promise<Blog | null> {
-  const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+  function getBaseUrl() {
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`; // production
+  }
+  return 'http://localhost:3000'; // local
+}
 
+  const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
     cache: "no-store",
   });
