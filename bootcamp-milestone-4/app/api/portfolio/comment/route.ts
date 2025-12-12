@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectDB from "@/database/db";
-import Portfolio from "@/database/projectSchema";
-
-
-
+import connectDB from "../../../../database/db";
+import Portfolio from "../../../../database/projectSchema";
 
 export async function POST(req: NextRequest) {
   await connectDB();
@@ -43,12 +40,8 @@ export async function POST(req: NextRequest) {
       { message: "Comment added", portfolio: updatedPortfolio },
       { status: 201 }
     );
-
   } catch (err) {
     console.error("Error adding portfolio comment:", err);
-    return NextResponse.json(
-      { error: "Server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

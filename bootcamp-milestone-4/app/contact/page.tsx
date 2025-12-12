@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import style from "@/components/contact.module.css"
+import style from "../../components/comment.module.css";
 
 export default function Contact() {
   const [formData, setFormData] = useState({

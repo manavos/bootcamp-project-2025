@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import connectDB from "@/database/db";
-import Blog from "@/database/blogSchema";
+import connectDB from "../../../../../database/db";
+import Blog from "../../../../../database/blogSchema";
 
-export async function POST(req: NextRequest, context: { params: Promise<{ slug: string }> }) {
-
+export async function POST(
+  req: NextRequest,
+  context: { params: Promise<{ slug: string }> }
+) {
   await connectDB();
 
   const { slug } = await context.params;
@@ -35,10 +37,7 @@ export async function POST(req: NextRequest, context: { params: Promise<{ slug: 
     );
 
     if (!updatedBlog) {
-      return NextResponse.json(
-        { error: "Blog not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
 
     return NextResponse.json(
@@ -47,9 +46,6 @@ export async function POST(req: NextRequest, context: { params: Promise<{ slug: 
     );
   } catch (err) {
     console.error("Error adding comment:", err);
-    return NextResponse.json(
-      { error: "Server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
