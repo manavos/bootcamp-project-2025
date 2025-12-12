@@ -40,10 +40,10 @@ type IParams = {
 */
 export async function GET(
   req: Request,
-  context: { params: { slug: string } }
+  context: { params: Promise<{ slug: string }> }
 ) {
   // giving error: needed to await params before destructuring
-  const { slug } = context.params;
+  const { slug } = await context.params;
 
   await connectDB();
 
