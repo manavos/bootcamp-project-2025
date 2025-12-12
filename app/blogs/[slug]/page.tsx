@@ -22,7 +22,7 @@ type Blog = {
 async function getBlog(slug: string): Promise<Blog | null> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const res = await fetch(`https://bootcamp-project-2025-m25i29f9q-manavos-projects.vercel.app/${slug}`, {
+  const res = await fetch(`${baseUrl}/${slug}`, {
     cache: "no-store",
   });
 
