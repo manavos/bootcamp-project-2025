@@ -4,7 +4,6 @@ import style from "../blogs.module.css";
 import Comment from "@/components/Comment"
 import CommentForm from "@/components/commentForm";
 
-
 type IComment = {
   user: string;
   time: Date;
@@ -39,11 +38,11 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
   return (
     <main className={style.blogDetail}>
       <h1 className="page-title">{blog.title}</h1>
-      <h3>{new Date(blog.date).toLocaleDateString("en-US", {
+      <h2>{new Date(blog.date).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
-        })}</h3>
+        })}</h2>
       <Image src={blog.image} alt={blog.imageAlt} width={800} height={500} />
       <p>{blog.content}</p>
        <h2>Comments</h2>
@@ -55,7 +54,7 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         <p>No comments yet.</p>
       )}
 
-      <h3>Add comment</h3>
+      <h3 className={style.addComment}>Add comment</h3>
 
       <CommentForm slug={slug} />
 
