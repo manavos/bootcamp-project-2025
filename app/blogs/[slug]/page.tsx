@@ -20,7 +20,9 @@ type Blog = {
 };
 
 async function getBlog(slug: string): Promise<Blog | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000';
 
   const res = await fetch(`${baseUrl}/${slug}`, {
     cache: "no-store",
