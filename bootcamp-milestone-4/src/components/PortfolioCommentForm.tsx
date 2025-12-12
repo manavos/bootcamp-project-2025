@@ -42,7 +42,6 @@ export default function PortfolioCommentForm({ project }: PortfolioCommentFormPr
       setStatus("Comment posted!");
       setForm({ user: "", comment: "" });
 
-      // Optional: fetch new comments or reload page
       window.location.reload();
     } catch (err) {
       console.error(err);
@@ -58,8 +57,6 @@ export default function PortfolioCommentForm({ project }: PortfolioCommentFormPr
         placeholder="Your name"
         value={form.user}
         onChange={handleChange}
-        required
-        style={{ width: "100%", marginBottom: "10px" }}
       />
 
       <textarea
@@ -67,11 +64,9 @@ export default function PortfolioCommentForm({ project }: PortfolioCommentFormPr
         placeholder="Your comment"
         value={form.comment}
         onChange={handleChange}
-        required
-        style={{ width: "100%", marginBottom: "10px", height: "80px" }}
       />
 
-      <button type="submit" style={{ padding: "8px 16px" }}>
+      <button type="submit">
         Add Comment
       </button>
 

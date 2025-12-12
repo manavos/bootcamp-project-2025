@@ -33,7 +33,7 @@ export default function PortfolioCard(props: ProjectType) {
       </div>
 
       <div className={style.commentsSection}>
-      <h2>Comments</h2>
+      
 
       {props.comments.length > 0 ? (
         props.comments.map((comment: IComment, i: number) => (
