@@ -2,47 +2,36 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import style from "../blogs.module.css";
 import Comment from "../../../components/Comment";
+import connectDB from "../../../database/db";
 import CommentForm from "../../../components/commentForm";
+import Blog from "../../../database/blogSchema";
 
-type IComment = {
+export type IComment = {
   user: string;
   time: Date;
   comment: string;
 };
 
-type Blog = {
-  title: string;
-  date: string;
-  image: string;
-  imageAlt: string;
-  content: string;
-  comments: IComment[];
-};
 
-async function getBlog(slug: string): Promise<Blog | null> {
-  function getBaseUrl() {
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`; // production
-  }
-  return 'http://localhost:3000'; // local
+async function getBlog(slug: string) {
+  await connectDB();
+
+  try {
+      const blogs = await Blog.findOne({ slug }).orFail();
+      return blogs;
+    } catch (err) {
+      console.error("Error fetching blogs:", err);
+      return null;
+    }
 }
 
-  const baseUrl = getBaseUrl();
-  const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) return null;
-  return res.json();
-}
-
-// Await params.slug because it might be a Promise
+// await params.slug because it might be a Promise
 export default async function BlogPage({
   params,
 }: {
-  params:{ slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params; // <-- await here
+  const { slug } = await params; //  await here
   const blog = await getBlog(slug);
 
   if (!blog) return notFound();
