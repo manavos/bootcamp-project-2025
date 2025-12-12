@@ -40,9 +40,9 @@ async function getBlog(slug: string): Promise<Blog | null> {
 export default async function BlogPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params:{ slug: string };
 }) {
-  const { slug } = await params; // <-- await here
+  const { slug } = params; // <-- await here
   const blog = await getBlog(slug);
 
   if (!blog) return notFound();
