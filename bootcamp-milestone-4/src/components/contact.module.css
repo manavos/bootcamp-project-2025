@@ -1,0 +1,45 @@
+.formContainer {
+  width: 500px;
+  margin: 0 auto;
+}
+
+/* now everything is scoped under your class */
+.formContainer label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: Georgia;
+  font-weight: bold;
+  color: #BF7E81;
+}
+
+.formContainer input[type="text"],
+.formContainer input[type="email"],
+.formContainer textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
+  font-family: Georgia;
+}
+
+
+.formContainer button {
+  background-color: rgb(137, 5, 53);
+  border: none;
+  color: white;
+
+  font-size: 15px;
+
+  padding: 7px 10px;
+
+  border-radius: 5px;
+  display: block;
+  margin: 0 auto;
+}
+
+.formContainer button:hover {
+  background-color: rgb(147, 103, 116);
+}
