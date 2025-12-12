@@ -3,7 +3,6 @@ import connectDB from "../../database/db";
 import Project from "../../database/projectSchema";
 import PortfolioCard from "../../components/portfolioCard";
 import style from "../../components/portfolioCard.module.css";
-import CommentFormToggle from "../../components/CommentFormToggle";
 import PortfolioCommentForm from "../../components/PortfolioCommentForm";
 
 async function getProjects() {
