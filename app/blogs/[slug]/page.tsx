@@ -24,7 +24,7 @@ async function getBlog(slug: string): Promise<Blog | null> {
   ? `https://${process.env.VERCEL_URL}`
   : 'http://localhost:3000';
 
-  const res = await fetch(`${baseUrl}/${slug}`, {
+  const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
     cache: "no-store",
   });
 
